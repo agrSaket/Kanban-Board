@@ -1,0 +1,63 @@
+.dashContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    overflow-x: scroll;
+    min-height: 100vh;
+}
+
+.flexelem{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.cardHeading1{
+    padding: 5px 20px 10px 20px;
+    width: 100%;
+    margin: 0px 20px;
+}
+
+.selectList{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    width: 100%;
+    margin: 0px 20px;
+}
+
+.dashboard{
+    flex: 1;
+    padding: 10px;
+    justify-content: flex-start;
+    margin: 0px 30px 0 0;
+}
+
+.cardList{
+    position: relative;
+    border: 1px solid rgb(229, 229, 229);
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgb(76, 76, 76);
+}
+
+.lightcolor{
+    color: rgb(60, 60, 60);
+}
+
+.number{
+    font-size: 13px;
+}
+
+.status {
+    position: absolute;
+    justify-content: center;
+    right: 0;
+    bottom: 0;
+    width: 10px;
+    height: 10px;
+    border : 1px solid black;
+    border-radius: 50%;
+}

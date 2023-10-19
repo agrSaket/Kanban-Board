@@ -1,0 +1,53 @@
+.navbar {
+    padding: 15px 20px ;
+    background-color: white;
+}
+
+.navbarButton {
+    position: relative;
+    background-color: white;
+}
+
+.groupButton {
+    z-index: 10;
+    border: 1px solid rgb(0, 0, 0);
+    box-shadow: 2px 2px rgb(96, 96, 96);
+    border-radius: 5px;
+    width: 110px;
+    height: 30px;
+    padding: 5px 5px;
+    justify-content: space-evenly;
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+}
+
+.dropDown {
+    position: absolute;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 3px;
+    padding: 8px;
+    margin: 10px 5px 5px 0px;
+    border: 1px solid rgb(69, 69, 69);
+    border-radius: 7px;
+    box-shadow: 3px 3px 10px rgb(121, 121, 121);
+    z-index: 10;
+}
+
+.group {
+    padding: 5px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+select {
+    width: 100px;
+    padding: 2px 5px;
+    border: 1px solid silver;
+    border-radius: 4px;
+    background-color: white;
+}
