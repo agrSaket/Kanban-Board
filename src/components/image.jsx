@@ -78,6 +78,15 @@ const Image = ({ title }) => {
         case "Low1":
             imageSrc = <PiCellSignalLowBold style={{color:"rgb(5, 176, 62)", fontSize:'1rem', backgroundColor:'transparent'}}/>
             break;
+        case "Todo1":
+            imageSrc = <BsCircle style={{color:"rgb(5, 176, 62)", fontSize:'0.7rem', backgroundColor:'transparent'}}/>;
+            break;
+        case "In progress1":
+            imageSrc = <GiProgression style={{color:"rgb(248, 217, 2)", fontSize:'0.7rem', backgroundColor:'transparent'}}/>;
+            break;
+        case "Backlog1":
+            imageSrc = <GiBackwardTime style={{color:"rgb(104, 181, 254)", fontSize:'0.7rem', backgroundColor:'transparent'}}/>;
+            break;
         default:
             imageSrc = <BsFillCheckCircleFill/>;
     }

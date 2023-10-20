@@ -7,19 +7,20 @@ export const dataSelectSlice = createReducer(
         // Reducer for handling data selection request
         dataSelectRequest: (state) => {
             state.loading = true; // Set loading to true
-            state.dataSelected = []; // Initialize dataSelected as an empty array
+            state.dashColumn = []; // Initialize dashColumn as an empty array
         },
         // Reducer for handling data selection success
         dataSelectSuccess: (state, action) => {
             state.loading = false; // Set loading to false
-            state.dataSelected = action.payload.dataSelected; // Store selected data
-            state.user = action.payload.user; // Store user information
+            state.dashColumn = action.payload.dashColumn; // Store selected data
+            state.userstatus = action.payload.userstatus; // Store user information
             state.prioritystatus = action.payload.prioritystatus;
+            state.statstatus = action.payload.statstatus;
         },
         // Reducer for handling data selection failure
         dataSelectFailure: (state, action) => {
             state.loading = false; // Set loading to false
-            state.dataSelected = []; // Clear selected data
+            state.dashColumn = []; // Clear selected data
             state.message = action.payload.message; // Store an error message if available
         },
     }

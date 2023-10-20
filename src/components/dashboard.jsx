@@ -8,7 +8,7 @@ import Image from "../components/image";
 
 // Dashboard component for displaying the Kanban board
 const Dashboard = () => {
-    const { dataSelected, user} = useSelector((state) => state.dataSelectSlice);
+    const { dashColumn} = useSelector((state) => state.dataSelectSlice);
     const priorityList = ["No priority", "Urgent", "High", "Medium", "Low"];
     const { users } = useSelector((state) => state.dataSlice);
     let availablearr = {};
@@ -17,9 +17,9 @@ const Dashboard = () => {
     });
     
     return (
-        dataSelected && (
+        dashColumn && (
         <div className="dashContainer">
-            {dataSelected.map((element, index) => {
+            {dashColumn.map((element, index) => {
             return (
                 <>
                 <div key={index} className="dashboard">
@@ -43,9 +43,7 @@ const Dashboard = () => {
                                     title={element.title}
                                     tags={element.tag}
                                     userId = {element.userId}
-                                    status = {
-                                        user ? true : false
-                                    }
+                                    status = {element.status}
                                     priority = {priorityList[element.priority]+"1"}
                                 />
                             </div>

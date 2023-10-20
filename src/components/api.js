@@ -3,6 +3,7 @@ import axios from "axios";
 // Action to fetch data from the API
 export const fetchData = () => async (dispatch) => {
     try {
+        /* inform the application that a data request is being made. */
         dispatch({ type: "dataRequest" });
 
         // Fetch data from the API
@@ -16,40 +17,39 @@ export const fetchData = () => async (dispatch) => {
     }
 };
 
-// Action to select and organize data based on group, tickets, and order
-export const dataSelect = (group, tickets, order) => async (dispatch) => {
+// Action to select and organize data based on group, cards, and order
+export const dataSelect = (group, cards, order) => async (dispatch) => {
     try {
-        console.log(group, tickets, order);
         dispatch({ type: "dataSelectRequest" });
 
-        let user = false;
+        let userstatus = false;
         let prioritystatus = false;
-        let set = new Set();
+        let statstatus = false;
+        let tempset = new Set();
         // Define an array to store unique values
-        let array = [],
-        dataSelected = [];
+        let array = [], dashColumn = [];
 
         if (order === "title") {
-            // Sort the dataSelected by the title property
-            dataSelected.forEach((element, index) => {
+            // Sort the dashColumn by the title property
+            dashColumn.forEach((element, index) => {
                 element[index]?.value?.sort((a, b) => a.title.localeCompare(b.title));
             });
         }
 
         if (group === "status") {
+            statstatus = true;
             // Group data by status
-            tickets.forEach((element) => {
-                set.add(element.status);
+            cards.forEach((element) => {
+                tempset.add(element.status);
             });
-
-            array = [...set];
+            array = [...tempset];
 
             array.forEach((element, index) => {
                 // Filter and organize data by status
-                let array = tickets.filter((filterElement) => {
-                return element === filterElement.status;
+                let array = cards.filter((filterElement) => {
+                    return element === filterElement.status;
                 });
-                dataSelected.push({
+                dashColumn.push({
                     [index]: {
                         title: element,
                         value: array,
@@ -57,32 +57,34 @@ export const dataSelect = (group, tickets, order) => async (dispatch) => {
                 });
             });
         } else if (group === "user") {
-            user = true;
+            userstatus = true;
             // Group data by user
-            tickets?.users?.forEach((element, index) => {
-                    array = tickets?.tickets?.filter((filterElement) => {
-                        return element.id === filterElement.userId;
+            cards?.users?.forEach((element, index) => {
+                /* filter the `cards` array */
+                array = cards?.tickets?.filter((filterElement) => {
+                    return element.id === filterElement.userId;
                 });
 
-                dataSelected.push({
+                /* add an object to the `dashColumn` array. */
+                dashColumn.push({
                     [index]: {
                         title: element.name,
                         value: array,
                     },
                 });
             });
-            console.log(dataSelected);
+            console.log(dashColumn);
         } else {
             // Group data by priority
             prioritystatus = true;
             let priorityList = ["No priority", "Urgent", "High", "Medium", "Low"];
 
             priorityList.forEach((element, index) => {
-                    array = tickets.filter((filterElement) => {
+                    array = cards.filter((filterElement) => {
                         return index === filterElement.priority;
                     });
 
-                dataSelected.push({
+                dashColumn.push({
                     [index]: {
                         title: element,
                         value: array,
@@ -91,15 +93,14 @@ export const dataSelect = (group, tickets, order) => async (dispatch) => {
             });
         }
 
-        // Sort the dataSelected by priority
+        // Sort the dashColumn by priority in ascending order
         if (order === "priority") {
-            dataSelected.forEach((element, index) => {
-                element[index]?.value?.sort((a, b) => b.priority - a.priority);
+            dashColumn.forEach((element, index) => {
+                element[index]?.value?.sort((a, b) => a.priority - b.priority);
             });
         }
 
-        console.log(dataSelected);
-        dispatch({ type: "dataSelectSuccess", payload: { dataSelected, user, prioritystatus } });
+        dispatch({ type: "dataSelectSuccess", payload: { dashColumn, userstatus, prioritystatus, statstatus } });
     } catch (error) {
         dispatch({ type: "dataSelectFailure", payload: error.message });
     }
